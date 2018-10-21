@@ -24,12 +24,27 @@ FormView.showResetBtn = function(show = true){
 
 FormView.bindEvent = function(){
     //inputEl의 keyup이벤트를 받아서 다시 onkeyup 함수에 넘겨준다.
+    this.on('submit', e => e.preventDefault())
     this.inputEl.addEventListener('keyup', e => this.onkeyup(e))
+
 }
 
-FormView.onkeyup = function(){
+FormView.onkeyup = function(e){
     //inputEl 엘리먼트의 value의 length가 0이 아닐때만 true를 showResetBtn에게 넘겨준다.
     this.showResetBtn(this.inputEl.value.length)
+
+    //만약 이벤트의 키가 엔터가 아니라면 그대로 리턴
+    if(e.key !== "Enter") return
+
+
+    //엔터라면 검색 결과가 보여야 하는데 이것은 FormView 모듈에서 해야할 일은 아니다.
+    //FormView는 키가 Enter키일때 이것을 MainContoller에게 알려기만 하고
+    //MainController는 다른 View에게 검색 결과를 보여주도록 요청하면 된다.
+
+    //그때 사용하는 것이 View 모듈에 있는 emit 메소드 이다. (이벤트 발생)
+
+    //첫번째 파라미터로는 사용자 정의 submit이벤트, 두번째 파라미터로는 입력 폼의 value를 넘겨준다
+    this.emit('@submit', {input: this.inputEl.value})
 }
 
 export default FormView
