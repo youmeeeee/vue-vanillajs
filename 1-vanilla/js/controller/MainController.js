@@ -1,6 +1,7 @@
 import FormView from '../views/FormView.js'
 import ResultView from '../views/ResultView.js'
 import TabView from '../views/TabView.js'
+import KeywordView from '../views/KeywordView.js'
 
 import SearchModel from '../models/SearchModel.js'
 import HistoryModel from '../models/HistoryModel.js'
@@ -18,6 +19,8 @@ export default {
             .on('@reset', e => this.onResetForm())
 
 
+        KeywordView.setup(document.querySelector('#search-keyword'))
+
         ResultView.setup(document.querySelector('#search-result'))
 
         TabView.setup(document.querySelector('#tabs'))
@@ -26,15 +29,26 @@ export default {
 
         this.selectedTab = '추천검색어'
         this.renderView()
-
     },
 
     renderView(){
         console.log(tag, 'renderView()')
         TabView.setActiveTab(this.selectedTab)
+
+        if(this.selectedTab === '추천검색어'){
+           this.fetchSearchKeyword()
+        }else{
+            // this.fetchHistoryKeyword()
+        }
         ResultView.hide()
+
     },
 
+    fetchSearchKeyword(){
+        KeywordModel.list().then(data=>{
+            KeywordView.render(data)
+        })
+    },
 
     search(query){
         console.log(tag, 'search()', query)
