@@ -8,26 +8,35 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <div>
-    <header>
-      <h2 class="container">검색</h2>
-    </header>
+<div>
+  <!--타이틀-->
+  <header>
+    <h2 class="container">검색</h2>
+  </header>
 
-    <div class="container">
-      <!--검색폼-->
-      <form>
-        <input type="text" placeholder="검색어를 입력하세요" autofocus>
-        <button type="reset" class="btn-reset"></button>
-      </form>
+  <div class="container">
+    <!--검색폼-->
+    <form>
+      <input type="text" placeholder="검색어를 입력하세요" autofocus>
+      <button type="reset" class="btn-reset"></button>
+    </form>
 
+    <div class="content">
+      <!--탭메뉴-->
+      <ul id="tabs" class="tabs">
+        <li>추천검색어</li>
+        <li>최근검색어</li>
+      </ul>
+
+        <!--추천검색어-->
+        
 
       <!--검색결과-->
-      <div class="content">
-        <div id="search-result"></div>
-      </div>
-
+      <div id="search-result"></div>
     </div>
+
   </div>
-  <script type="module" src="./js/app.js"></script>
+</div>
+<script type="module" src="./js/app.js"></script>
 </body>
 </html>

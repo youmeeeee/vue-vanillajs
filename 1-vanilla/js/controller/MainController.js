@@ -1,7 +1,10 @@
 import FormView from '../views/FormView.js'
 import ResultView from '../views/ResultView.js'
+import TabView from '../views/TabView.js'
 
 import SearchModel from '../models/SearchModel.js'
+import HistoryModel from '../models/HistoryModel.js'
+import KeywordModel from '../models/KeywordModel.js'
 
 const tag ='[MainController]'
 
@@ -16,6 +19,20 @@ export default {
 
 
         ResultView.setup(document.querySelector('#search-result'))
+
+        TabView.setup(document.querySelector('#tabs'))
+            .on('@change', e => this.onChangeTab(e.detail.tabName))
+
+
+        this.selectedTab = '추천검색어'
+        this.renderView()
+
+    },
+
+    renderView(){
+        console.log(tag, 'renderView()')
+        TabView.setActiveTab(this.selectedTab)
+        ResultView.hide()
     },
 
 
@@ -26,7 +43,6 @@ export default {
         })
 
     },
-
 
     onSubmit(input){
         console.log(tag,'onSubmit()', input)
@@ -41,5 +57,11 @@ export default {
 
     onSearchResult(data){
         ResultView.render(data)
+    },
+
+
+    onChangeTab(tabName){
+        debugger;
     }
+
 }
