@@ -20,6 +20,7 @@ export default {
 
 
         KeywordView.setup(document.querySelector('#search-keyword'))
+            .on('@click', e => this.onClickKeyword(e.detail.keyword))
 
         ResultView.setup(document.querySelector('#search-result'))
 
@@ -40,7 +41,8 @@ export default {
         }else{
             // this.fetchHistoryKeyword()
         }
-        ResultView.hide()
+
+        // ResultView.hide()
 
     },
 
@@ -70,12 +72,18 @@ export default {
 
 
     onSearchResult(data){
+        TabView.hide()
+        KeywordView.hide()
         ResultView.render(data)
     },
 
 
     onChangeTab(tabName){
-        debugger;
+        debugger
+    },
+
+    onClickKeyword(keyword){
+        this.search(keyword)
     }
 
 }
