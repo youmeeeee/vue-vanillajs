@@ -15,6 +15,7 @@ TabView.setActiveTab = function(tabName){
     Array.from(this.el.children).forEach(li => {
         li.className = li.innerHTML === tabName ? 'active' : ''
     })
+    this.show()
 
 }
 

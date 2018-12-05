@@ -26,7 +26,6 @@ FormView.bindEvent = function(){
     this.on('submit', e => e.preventDefault())
     //inputEl의 keyup이벤트를 받아서 다시 onkeyup 함수에 넘겨준다.
     this.inputEl.addEventListener('keyup', e => this.onKeyup(e))
-
     this.resetEl.addEventListener('click', e => this.onClickReset(e))
 
 }
@@ -54,8 +53,11 @@ FormView.onKeyup = function(e){
 
     //첫번째 파라미터로는 사용자 정의 submit이벤트, 두번째 파라미터로는 입력 폼의 value를 넘겨준다
     this.emit('@submit', {input: this.inputEl.value})
+}
 
-
+FormView.setValue = function (value = '') {
+    this.inputEl.value = value
+    this.showResetBtn(this.inputEl.value.length)
 }
 
 export default FormView

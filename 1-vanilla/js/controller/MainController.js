@@ -39,10 +39,10 @@ export default {
         if(this.selectedTab === '추천검색어'){
            this.fetchSearchKeyword()
         }else{
-            // this.fetchHistoryKeyword()
+            debugger
         }
 
-        // ResultView.hide()
+        ResultView.hide()
 
     },
 
@@ -53,7 +53,8 @@ export default {
     },
 
     search(query){
-        console.log(tag, 'search()', query)
+        FormView.setValue(query)
+        console.log(tag, 'searych()', query)
         SearchModel.list(query).then(data=>{
             this.onSearchResult(data)
         })
@@ -67,7 +68,7 @@ export default {
 
     onResetForm(){
         console.log(tag, 'onResetForm()');
-        ResultView.hide();
+        this.renderView()
     },
 
 
