@@ -1,6 +1,19 @@
 new Vue({
-  el: '#app',
+    el: '#app',
     data: {
-      msg: 'hello world!'
+        query: ''
+    },
+    methods:{
+        onSubmit(e){
+            console.log(e);
+        },
+        onReset(){
+            this.query = '';
+        },
+        onKeyup(){
+            if(!this.query.length){
+                this.onReset();
+            }
+        }
     }
 })
