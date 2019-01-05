@@ -8,19 +8,33 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <div id="app">
-    <header>
-      <h2 class="container">검색</h2>
-    </header>
+<div id="app">
+  <header>
+    <h2 class="container">검색</h2>
+  </header>
 
-    <div class="container">
-      <form v-on:submit.prevent="onSubmit">
-        <input v-model="query" type="text" placeholder="검색어를 입력하세요" autofocus @keyup="onKeyup">
-        <button v-show="query.length" class="btn-reset" @click="onReset"></button>
-      </form>
+  <div class="container">
+    <form v-on:submit.prevent="onSubmit">
+      <input v-model="query" type="text"  @keyup="onKeyup" placeholder="검색어를 입력하세요" autofocus >
+      <button v-show="query.length" class="btn-reset" type="reset" @click="onReset"></button>
+    </form>
+
+    <div v-if="submitted">
+      <div v-if="searchResult.length">
+        <ul >
+          <li v-for="item in searchResult">
+            <img :src="item.image">{{item.name}}
+          </li>
+        </ul>
+      </div>
+
+      <div v-else>
+        [ {{query}} ] 검색어로 찾을 수 없습니다.
+      </div>
     </div>
   </div>
-  <script src="https://unpkg.com/vue"></script>
-  <script type="module" src="./js/app.js"></script>
+</div>
+<script src="https://unpkg.com/vue"></script>
+<script type="module" src="./js/app.js"></script>
 </body>
 </html>
